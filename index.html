@@ -1,15 +1,30 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dawson David | Software Engineer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+      /* Simple fade-in animation */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-fade-in-up {
+        animation: fadeInUp 0.5s ease-out forwards;
+        opacity: 0; /* Start hidden */
+      }
+    </style>
     <script>
       tailwind.config = {
         theme: {
@@ -28,30 +43,302 @@
               'lightest-slate': '#ccd6f6',
               'accent': '#64ffda',
             },
-            animation: {
-              'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
-            },
-            keyframes: {
-              fadeInUp: {
-                '0%': { opacity: '0', transform: 'translateY(20px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
-              },
-            },
           },
         },
       }
     </script>
-  <script type="importmap">
-{
-  "imports": {
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
-    "react": "https://aistudiocdn.com/react@^19.1.1",
-    "react/": "https://aistudiocdn.com/react@^19.1.1/"
-  }
-}
-</script>
 </head>
   <body class="bg-primary text-slate">
-    <div id="root"></div>
+    <div class="font-sans max-w-4xl mx-auto px-6 sm:px-8 lg:px-10 py-12 md:py-20">
+      
+      <header id="header" class="flex flex-col md:flex-row md:items-center justify-between mb-16 animate-fade-in-up" style="animation-delay: 100ms">
+        <!-- Header content will be populated by JS -->
+      </header>
+
+      <main class="space-y-20">
+        <section class="animate-fade-in-up" style="animation-delay: 200ms">
+          <div class="flex items-center mb-6">
+            <h2 class="text-2xl font-bold text-lightest-slate whitespace-nowrap pr-4">Experience</h2>
+            <div class="w-full h-px bg-lightest-navy"></div>
+          </div>
+          <div id="experience-list" class="space-y-8">
+            <!-- Experience items will be populated by JS -->
+          </div>
+        </section>
+
+        <section class="animate-fade-in-up" style="animation-delay: 300ms">
+          <div class="flex items-center mb-6">
+            <h2 class="text-2xl font-bold text-lightest-slate whitespace-nowrap pr-4">Projects</h2>
+            <div class="w-full h-px bg-lightest-navy"></div>
+          </div>
+          <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Project cards will be populated by JS -->
+          </div>
+        </section>
+
+        <section class="animate-fade-in-up" style="animation-delay: 400ms">
+          <div class="flex items-center mb-6">
+            <h2 class="text-2xl font-bold text-lightest-slate whitespace-nowrap pr-4">Skills</h2>
+            <div class="w-full h-px bg-lightest-navy"></div>
+          </div>
+          <div id="skills-container">
+            <!-- Skills will be populated by JS -->
+          </div>
+        </section>
+        
+        <section class="animate-fade-in-up" style="animation-delay: 500ms">
+            <div class="flex items-center mb-6">
+                <h2 class="text-2xl font-bold text-lightest-slate whitespace-nowrap pr-4">Education</h2>
+                <div class="w-full h-px bg-lightest-navy"></div>
+            </div>
+            <div id="education-container" class="bg-secondary p-6 rounded-lg shadow-lg">
+                <!-- Education info will be populated by JS -->
+            </div>
+        </section>
+      </main>
+
+      <footer class="text-center mt-20 py-6 border-t border-lightest-navy">
+        <p class="text-sm text-slate">&copy; <span id="year"></span> Dawson David.</p>
+      </footer>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // --- DATA ---
+        const profileData = {
+          name: "Dawson David",
+          title: "Software Engineer | Data Science Focus",
+          bio: "Aspiring software engineer with a strong foundation in computer science and a passion for data-driven solutions. Currently pursuing a BS at the Colorado School of Mines and seeking to leverage my skills in real-world applications.",
+          location: "Grand Junction, CO",
+          contact: {
+            email: "dawsonleedavid@gmail.com",
+            phone: "+1 970 644 7679",
+            linkedin: "https://www.linkedin.com/in/dawson-david-41bb0918b/",
+            github: "https://github.com/1100011Dawg",
+            cluster: "https://nixos.mulard-lake.ts.net/",
+          },
+        };
+
+        const experiences = [
+          {
+            role: "Intern",
+            company: "SalesForce",
+            location: "Denver, CO",
+            dates: "May 2025 – Aug 2025",
+            description: [
+              "Worked with TypeScript and a large-scale monolith repository to extend a command-line interface (CLI) tool for customers.",
+              "Contributed across four distinct GitHub repositories for NPM modules, collectively exceeding one million weekly downloads.",
+            ],
+          },
+          {
+            role: "Front Desk",
+            company: "Motel 6",
+            location: "Grand Junction, CO",
+            dates: "May 2024 – Aug 2024",
+            description: [
+              "Managed check-ins and reservations for over 1000 guests, ensuring high levels of customer satisfaction.",
+              "Resolved on-shift incidents with effective and empathic communication.",
+              "Diagnosed and troubleshooted network connections and credit card terminals, resulting in cost savings.",
+            ],
+          },
+        ];
+
+        const projects = [
+            {
+                title: "Self Hosted cluster",
+                date: "January 2025",
+                description: [
+                "Built a k3s Kubernetes cluster on NixOS to self-host services like FreshRSS, Calibre, and SearXNG.",
+                "Managed cluster configuration with YAML files derived from Docker Compose examples, accessed securely via NodePorts and Tailscale.",
+                ],
+                tools: ["Kubernetes", "K3s", "NixOS", "Docker", "Tailscale", "YAML"],
+            },
+            {
+                title: "Fossil Prediction via Bio-metric Data",
+                date: "July 2024",
+                description: [
+                "Trained a histogram gradient boosting classifier on a Box-Cox standardized Encyclopedia of Life database.",
+                "Performed exploratory data analysis and visualization using Seaborn and Matplotlib to highlight key findings.",
+                ],
+                tools: ["Python", "Scikit-learn", "Seaborn", "Matplotlib", "Numpy"],
+            },
+            {
+                title: "Ecosystem Predator-Prey Model",
+                date: "Dec 2023",
+                description: [
+                "Modeled predator-prey dynamics by visualizing CSV data in a continuously changing 2D array with the SFML library.",
+                "Built upon research from a prior 'LD50 correlation with r-Selection' paper.",
+                ],
+                tools: ["C++", "SFML", "Bash"],
+            },
+            {
+                title: "Palisade IB Students Website",
+                date: "May 2023",
+                description: [
+                "Designed and developed a study resource website for fellow International Baccalaureate students.",
+                "Integrated a custom Google search engine, calendar iframe, and links to relevant coursework.",
+                ],
+                tools: ["HTML", "CSS", "JavaScript", "Google Search API"],
+            },
+        ];
+
+        const skills = {
+          languages: ["Bash", "C", "C++", "Python", "R", "Wolfram Mathematica", "TypeScript", "JavaScript"],
+          technologies: ["Arch Linux", "CSS", "Excel", "Git", "HTML", "Latex", "Outlook", "PowerPoint", "Solidworks", "Word", "NPM", "Kubernetes", "K3s", "NixOS", "Docker", "Tailscale", "YAML"],
+          communication: ["Customer Service", "Data Visualization", "Oratory", "Research", "SVG images", "Technical Writing"],
+        };
+
+        const education = {
+            school: "Colorado School of Mines, Golden, CO",
+            degree: "BS in Computer Science",
+            graduation: "Exp. May 2026",
+            focus: "Data Science",
+            gpa: "3.975/4.0",
+            courses: ["Data Structures And Algorithms", "Introductions to Data Science", "Statistical Modeling"]
+        };
+
+        // --- ICONS (as functions returning strings) ---
+        const getIcon = (name) => {
+            const icons = {
+                'mail': `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>`,
+                'phone': `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>`,
+                'location': `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>`,
+                'linkedin': `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>`,
+                'github': `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>`,
+                'cluster': `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v2M12 20v2"></path><path d="m4.93 4.93 1.41 1.41M17.66 17.66l1.41 1.41"></path><path d="M2 12h2M20 12h2"></path><path d="m4.93 19.07 1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>`,
+                'bullet': `<svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="h-5 w-5"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>`,
+                'externalLink': `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link text-slate group-hover:text-accent transition-colors duration-300"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>`
+            };
+            return icons[name] || '';
+        };
+
+        // --- RENDER FUNCTIONS ---
+        const renderHeader = () => {
+          const header = document.getElementById('header');
+          header.innerHTML = `
+            <div>
+              <h1 class="text-4xl md:text-5xl font-bold text-lightest-slate tracking-tight">${profileData.name}</h1>
+              <h2 class="mt-2 text-lg md:text-xl font-medium text-light-slate">${profileData.title}</h2>
+              <p class="mt-4 max-w-md text-slate leading-relaxed">${profileData.bio}</p>
+              <div class="mt-4 flex items-center space-x-4 text-xs">
+                  ${getIcon('location')}
+                  <span>${profileData.location}</span>
+              </div>
+            </div>
+            <div class="mt-8 md:mt-0 flex flex-col items-start md:items-end space-y-3">
+              <a href="mailto:${profileData.contact.email}" class="flex items-center space-x-3 text-sm hover:text-accent transition-colors duration-300">
+                ${getIcon('mail')}
+                <span>${profileData.contact.email}</span>
+              </a>
+              <a href="tel:${profileData.contact.phone.replace(/\s|-/g, '')}" class="flex items-center space-x-3 text-sm hover:text-accent transition-colors duration-300">
+                ${getIcon('phone')}
+                <span>${profileData.contact.phone}</span>
+              </a>
+              <div class="flex space-x-4 pt-2">
+                <a href="${profileData.contact.linkedin}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="text-slate hover:text-accent transition-colors duration-300">${getIcon('linkedin')}</a>
+                <a href="${profileData.contact.github}" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="text-slate hover:text-accent transition-colors duration-300">${getIcon('github')}</a>
+                <a href="${profileData.contact.cluster}" target="_blank" rel="noopener noreferrer" aria-label="Self-hosted Cluster" class="text-slate hover:text-accent transition-colors duration-300">${getIcon('cluster')}</a>
+              </div>
+            </div>
+          `;
+        };
+        
+        const renderExperience = () => {
+            const container = document.getElementById('experience-list');
+            container.innerHTML = experiences.map(exp => `
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="md:w-1/4 text-sm font-mono text-slate whitespace-nowrap">${exp.dates}</div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-bold text-lightest-slate hover:text-accent transition-colors duration-300">${exp.role} · ${exp.company}</h3>
+                        <p class="text-sm text-light-slate mb-3">${exp.location}</p>
+                        <ul class="space-y-2">
+                            ${exp.description.map(point => `
+                                <li class="flex gap-3">
+                                    <span class="text-accent mt-1">${getIcon('bullet')}</span>
+                                    <span class="text-slate">${point}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `).join('');
+        };
+        
+        const renderProjects = () => {
+            const container = document.getElementById('project-grid');
+            container.innerHTML = projects.map(proj => {
+                const cardContent = `
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-lightest-slate group-hover:text-accent transition-colors duration-300">${proj.title}</h3>
+                                <p class="text-xs font-mono text-slate">${proj.date}</p>
+                            </div>
+                            ${proj.link ? getIcon('externalLink') : ''}
+                        </div>
+                        <ul class="space-y-2 mb-4 text-sm">
+                            ${proj.description.map(point => `<li class="text-light-slate">${point}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="p-6 pt-0 mt-auto">
+                        <div class="flex flex-wrap gap-2">
+                            ${proj.tools.map(tool => `<span class="bg-light-navy text-accent text-xs font-mono font-medium px-3 py-1 rounded-full">${tool}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+
+                return `
+                    <div class="bg-secondary rounded-lg shadow-lg flex flex-col h-full group transition-transform duration-300 ease-in-out hover:-translate-y-2">
+                        ${proj.link 
+                            ? `<a href="${proj.link}" target="_blank" rel="noopener noreferrer" class="flex flex-col h-full">${cardContent}</a>` 
+                            : cardContent}
+                    </div>
+                `;
+            }).join('');
+        };
+
+        const renderSkills = () => {
+            const container = document.getElementById('skills-container');
+            container.innerHTML = Object.entries(skills).map(([category, skillList]) => `
+                <div class="mb-6">
+                    <h3 class="text-md font-semibold text-light-slate mb-3 capitalize">${category}</h3>
+                    <div class="flex flex-wrap gap-2">
+                        ${skillList.map(skill => `<span class="bg-light-navy text-accent text-xs font-mono font-medium px-3 py-1 rounded-full">${skill}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        };
+        
+        const renderEducation = () => {
+            const container = document.getElementById('education-container');
+            container.innerHTML = `
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="text-lg font-bold text-lightest-slate">${education.school}</h3>
+                        <p class="text-light-slate">${education.degree}</p>
+                    </div>
+                    <span class="text-sm font-mono text-slate whitespace-nowrap">${education.graduation}</span>
+                </div>
+                <div class="mt-4 text-sm">
+                    <p><span class="font-semibold text-light-slate">Focus Area:</span> ${education.focus}</p>
+                    <p><span class="font-semibold text-light-slate">GPA:</span> ${education.gpa}</p>
+                    <p class="mt-2"><span class="font-semibold text-light-slate">Relevant Courses:</span> ${education.courses.join(' | ')}</p>
+                </div>
+            `;
+        };
+        
+        const renderFooter = () => {
+            document.getElementById('year').textContent = new Date().getFullYear();
+        };
+
+        // --- INITIALIZE APP ---
+        renderHeader();
+        renderExperience();
+        renderProjects();
+        renderSkills();
+        renderEducation();
+        renderFooter();
+      });
+    </script>
   </body>
 </html>
